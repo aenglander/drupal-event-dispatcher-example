@@ -1,0 +1,21 @@
+parameters:
+  drupal_event_dispatcher_example.config.whitelist: [127.0.0.1]
+
+services:
+
+  drupal_event_dispatcher_example.service.blacklist_service:
+    class: Drupal\drupal_event_dispatcher_example\BlackListService
+    arguments: ['%drupal_event_dispatcher_example.config.whitelist%']
+
+  drupal_event_dispatcher_example.service.logger_channel:
+      parent: logger.channel_base
+      arguments: ['drupal_event_dispatcher_example']
+
+  drupal_event_dispatcher_example.service.event_subscriber:
+    class: Drupal\drupal_event_dispatcher_example\EventSubscriber
+    arguments:
+      - @drupal_event_dispatcher_example.service.logger_channel
+      - @drupal_event_dispatcher_example.service.blacklist_service
+    tags:
+      - {name: event_subscriber}
+

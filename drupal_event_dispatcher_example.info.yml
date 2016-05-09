@@ -1,0 +1,8 @@
+name: Drupal Event Dispatcher Example
+description: Example Drupal module for The Infinite Wonder of the Symfony Event Dispatcher talk at Drupalcon 2016
+package: Custom
+
+type: module
+core: 8.x
+
+configure: drupal_event_dispatcher_example.settings
